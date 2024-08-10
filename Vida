@@ -1,0 +1,48 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Codevida : MonoBehaviour
+{
+   public int Vida = 7;
+   public void RestarVida (int cantidad)
+(
+    Vida -=cantidad;
+)
+}
+//Debes arrastrar el archivo de este codigo hacia la carpeta del jugador para que puedas modificar los valores ahi es donde se limita la vida 
+
+
+
+
+//Despues debes irte a la carpeta de los enemigos y agregar un collider para las dimensiones de los enemigos (contemplando que cuando el enemigo lo toque le quitara una vida, esa configuracioón la haces directamente con la opción de unity)
+//Esas dimensiones seran las que cuando entren en contacto con las dimensiones del personaje le restara la vida ((cunado te aparezaca la))
+
+//Pasos 1, selecciona el enemigo, le agregas un collider(para conocer las dimensiones del enemigo), 2, agregas otro collider trigger agregando las dimensiones del primer collider (sera el que haga daño al contacto )
+
+
+
+
+
+
+
+// Codigo para el daño 
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CodeDaño : MonoBehaviour
+{
+    public int cantidad = 1;
+
+    private void OntriggerEnter(Collider other)
+    {
+        if (other.tag == "Jugador")
+        {
+            other.GetComponent<CodeVida>().RestarVida(Cantidad)
+        }
+    }
+
+}
