@@ -1,0 +1,76 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class CharacterInteraction : MonoBehaviour
+{
+    public GameObject secondaryCharacter;  // Personaje secundario
+    public int correctAnswer = 5;  // La respuesta "correcta", puedes cambiarla // Por el tiempo que nos queda nos convendria dejar fija la respuesta true, si nos da tiempo ya checamos que sea de forma aleatoria
+    public Vector2 startPosition;  // Posición inicial del personaje principal
+
+    private bool isInRange = false;
+
+    void Start()
+    {
+       
+        startPosition = transform.position; // Guardar la posición inicial del personaje principal
+    }
+
+    void Update()
+    {
+        if (isInRange && Input.GetKeyDown(KeyCode.E))  // Esta parte es por si se asigna una tecla para comenzar a interactuar Supongamos que es E, y ese seria el codigo 
+        {
+            AskQuestion();
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject == secondaryCharacter)
+        {
+            isInRange = true;  // El personaje principal está cerca del personaje secundario
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject == secondaryCharacter)
+        {
+            isInRange = false;  // El personaje principal se aleja del personaje secundario
+        }
+    }
+
+    void AskQuestion()
+    {
+       
+        string userInput = UnityEngine.UI.InputField.text; // Simula la entrada del usuario // ventana de entrada de texto para la respuesta del jugador
+        int userAnswer;
+        
+        if (int.TryParse(userInput, out userAnswer))
+        {
+            if (userAnswer == correctAnswer)
+            {
+                Debug.Log("¡Respuesta correcta!");// Aquí puedes continuar con el juego o realizar alguna acción adicional ya sea subir de nivel, por ahora le pondre para que finalice
+                EndGame();
+
+            }
+            else
+            {
+                Debug.Log("Respuesta incorrecta. Volviendo al inicio...");
+                ReturnToStart();
+            }
+        }
+        else
+        {
+            Debug.Log("Entrada inválida.");
+        }
+    }
+
+    void ReturnToStart()
+    {
+        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);// Reiniciar la escena actual
+
+        // Alternativamente, puedes mover el personaje a la posición inicial sin recargar la escena
+        // transform.position = startPosition;
+    }
+}
