@@ -1,0 +1,55 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+public class PlayerLives : MonoBehaviour
+{
+    public int startingLives = 3;  // Vidas iniciales
+    public int maxLives = 7;       // Máximo de vidas posibles
+    private int currentLives;      // Vidas actuales
+
+    public Text livesText;         // Texto en la UI para mostrar las vidas
+
+    void Start()
+    {
+        
+        currentLives = startingLives;// Inicializar las vidas
+        UpdateLivesText();
+    }
+
+    //  mostrar el texto de las vidas en la esquina superior izquierda
+    void UpdateLivesText()
+    {
+        livesText.text = "Vidas: " + currentLives.ToString();
+    }
+
+    //  perder una vida
+    public void LoseLife()
+    {
+        if (currentLives > 0)
+        {
+            currentLives--;
+            UpdateLivesText();
+            if (currentLives <= 0)
+            {
+                GameOver();
+            }
+        }
+    }
+
+    // ganar una vida ( al recoger un item de vida extra)
+    public void GainLife()
+    {
+        if (currentLives < maxLives)
+        {
+            currentLives++;
+            UpdateLivesText();
+        }
+    }
+
+    //  el jugador se queda sin vidas
+    void GameOver()
+    {
+        Debug.Log("Juego Terminado");
+        // Aquí puedes agregar otra continuación para reiniciar el nivel o mostrar la pantalla de game over
+    }
+}
