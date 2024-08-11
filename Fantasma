@@ -1,0 +1,28 @@
+using UnityEngine;
+
+public class PersonajeSecundario : MonoBehaviour
+{
+    public float velocidadVuelo = 2.0f;
+    public string mensajeDeComentario = "Sabias que podias aumentar tus vidas con 3 insectos";
+
+    private void Update()
+    {
+        
+        transform.position += Vector3.left * velocidadVuelo * Time.deltaTime;// Mover al personaje secundario horizontalmente
+        
+      
+        if (transform.position.x < -10.0f) // Ajusta el valor según el tamaño del mapa  // Si el personaje sale del límite izquierdo, vuelve al derecho
+        {
+            transform.position = new Vector3(10.0f, transform.position.y, transform.position.z); // Ajusta el valor según el tamaño del mapa
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("PersonajePrincipal"))
+        {
+           
+            Debug.Log(mensajeDeComentario); // Muestra el mensaje en la consola
+        }
+    }
+}
