@@ -1,0 +1,61 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement
+
+public class Eliminacióndevidas : MonoBehaviour
+{
+    public GameObject[] Peces;
+    private int life;
+    private float checkPointPositionX, checkPointPositionY;
+    public Animator animator;
+ }
+    // Start is called before the first frame update
+    void Start()
+    {
+        life = Peces.Length;
+        if (PlayerPrefs.GetFloat("checkPointPositionX")!=0)
+    {
+            transform.positio = (new Vector2(PlayerPrefs.GetFloat("checkPointPositionX"), PlayerPrefs.Getfloat("CheckPointPositionY")));
+    }
+    }
+
+    // Update is called once per frame
+   private void Update()
+    {
+        if (life < 1)
+    {
+            Destroy(peces[0].gameObject);
+            void ReturnToStart()
+            {
+            NivelUno.LoadScene(SceneManager.GetActiveScene().buildIndex);
+         }
+        }
+    else if (life < 2)
+{
+Destroy(peces[1].gameObject);
+}
+else if (life < 3)
+{
+    Destroy(peces[2].gameObject);
+}
+else if (life < 4 )
+{
+    Destroy(peces[3].gameObject);
+}
+else < 5
+{
+    Destroy(peces[4].gameObject);
+}
+
+}
+public void Cantidad(float x, float y)
+{
+    playerPrefs.SetFloat("checkPointPositionX, x");
+    playerPrefs.SetFloat("checkPointPositionY, y");
+
+}
+public void DañoEnemigo()
+{
+        life--;
+}
