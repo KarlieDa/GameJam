@@ -1,0 +1,50 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class SaludJugador : MonoBehaviour
+{
+    public int saludMaxima = 7; // Salud máxima del jugador
+    public Slider vida;
+    private int saludActual; // Salud actual del jugador
+
+    void Start()
+    {
+        saludActual = saludMaxima; // Inicia con la salud máxima
+    }
+void update()
+
+    public void RecibirDaño(int cantidadDeDaño)
+    {
+        vida.value = saludMaxima;
+        saludActual -= cantidadDeDaño;
+        Debug.Log("Salud actual: " + saludActual);
+
+        if (saludActual <= 0)
+        {
+            Morir();
+        }
+    }
+
+    // Método para curar al jugador
+    public void Curar(int cantidadDeCuracion)
+    {
+        saludActual += cantidadDeCuracion;
+
+        if (saludActual > saludMaxima)
+        {
+            saludActual = saludMaxima;
+        }
+
+        Debug.Log("Salud actual: " + saludActual);
+    }
+
+    // Método para manejar la muerte del jugador
+    private void Morir()
+    {
+        Debug.Log("Haz morido");
+        // Aquí puedes añadir lo que sucederá cuando el jugador muera, como recargar la escena o mostrar un mensaje
+        Destroy(gameObject);
+    }
+}
